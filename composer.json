@@ -1,0 +1,16 @@
+{
+    "name": "supachai/php-linenotify",
+    "description": "This library LINE notify",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Supachai Wisachai",
+            "email": "supachai.wi@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-0": {"wisadev": "src/"}
+    },
+    "require": {}
+}
