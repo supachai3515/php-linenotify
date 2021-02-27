@@ -121,4 +121,43 @@ class LineNotify
             throw $e;
         }
     }
+
+    public function getStatus($token)
+    {
+        try {
+            $result_ = null;
+            if (isset($token) && !empty($token)) {
+                $chOne = curl_init();
+                curl_setopt($chOne, CURLOPT_URL, "https://notify-api.line.me/api/status");
+                // SSL USE 
+                curl_setopt($chOne, CURLOPT_SSL_VERIFYHOST, 0);
+                curl_setopt($chOne, CURLOPT_SSL_VERIFYPEER, 0); 
+                curl_setopt($chOne, CURLOPT_FOLLOWLOCATION, 1);
+                //ADD header array 
+                $headers = array('Content-type: application/x-www-form-urlencoded', 'Authorization: Bearer ' .  $token,);
+                curl_setopt($chOne, CURLOPT_HTTPHEADER, $headers);
+                //RETURN 
+                curl_setopt($chOne, CURLOPT_RETURNTRANSFER, 1);
+                $result = curl_exec($chOne);
+                //Check error 
+                if (curl_error($chOne)) {
+                    //echo 'error:' . curl_error($chOne);
+                    throw new Exception(curl_error($chOne));
+                } else {
+                    $result_ = json_decode($result, true);
+                    //echo "status : ".$result_['status']; echo "message : ". $result_['message']; 
+                    if ($result_["status"] != 200) {
+                        throw new Exception(curl_error($result_["message"]));
+                    }
+                }
+                //Close connect 
+                curl_close($chOne);
+            } else {
+                throw new Exception("error info");
+            }
+            return  $result_;
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
 }
