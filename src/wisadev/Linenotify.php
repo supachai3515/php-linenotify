@@ -108,7 +108,7 @@ class LineNotify
                     $result_ = json_decode($result, true);
                     //echo "status : ".$result_['status']; echo "message : ". $result_['message']; 
                     if ($result_["status"] != 200) {
-                        throw new Exception(curl_error($result_["message"]));
+                        throw new Exception($result_["message"]);
                     }
                 }
                 //Close connect 
@@ -147,7 +147,7 @@ class LineNotify
                     $result_ = json_decode($result, true);
                     //echo "status : ".$result_['status']; echo "message : ". $result_['message']; 
                     if ($result_["status"] != 200) {
-                        throw new Exception(curl_error($result_["message"]));
+                        throw new Exception($result_["message"]);
                     }
                 }
                 //Close connect 
